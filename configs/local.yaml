@@ -1,0 +1,5 @@
+postgres_url: postgres://postgres:postgres@localhost:5432/car_fix
+http_server:
+  address: "localhost:8086"
+  #timeout: 5s
+  #idle_timeout: 120s
