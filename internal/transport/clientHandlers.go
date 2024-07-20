@@ -19,11 +19,13 @@ type ClientHandler struct {
 var (
 	ErrInvalidName     = errors.New("invalid name")
 	ErrInvalidLastName = errors.New("invalid last name")
+	ErrEmptyName       = errors.New("empty name")
+	ErrEmptyLastName   = errors.New("empty last name")
 )
 
 func (h ClientHandler) validateReq(client *models.Client) error {
 	if client.Name == "" {
-		return ErrInvalidName
+		return ErrEmptyName
 	}
 	for _, v := range client.Name {
 		if !unicode.Is(unicode.Latin, v) {
@@ -32,13 +34,15 @@ func (h ClientHandler) validateReq(client *models.Client) error {
 	}
 
 	if client.LastName == "" {
-		return ErrInvalidLastName
+		return ErrEmptyLastName
 	}
 	for _, v := range client.LastName {
 		if !unicode.Is(unicode.Latin, v) {
 			return ErrInvalidLastName
 		}
 	}
+
+	// TODO: phone number validation
 
 	return nil
 }
